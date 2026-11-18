@@ -27,9 +27,15 @@ class TaskManager:
         return None
 
     def complete_task(self, task_id):
-        """Mark a task as completed."""
+        """Mark a task as completed.
+
+        Returns True if the task was completed now, False if it was
+        already completed. Raises ValueError if the ID does not exist.
+        """
         task = self.find_task(task_id)
         if task is None:
+            raise ValueError(f"No task found with ID {task_id}.")
+        if task["done"]:
             return False
         task["done"] = True
         return True
