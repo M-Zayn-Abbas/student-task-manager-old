@@ -2,7 +2,7 @@
 
 A simple Python console application for students to manage their tasks.
 
-Project status: Planning
+Project status: Testing
 
 ## How to run
 
