@@ -28,11 +28,21 @@ def handle_add(manager):
 
 
 def handle_complete(manager):
-    task_id = int(input("Task ID to complete: "))
-    if manager.complete_task(task_id):
-        print("Task marked as completed.")
-    else:
-        print("Task not found.")
+    pending = [task for task in manager.list_tasks() if not task["done"]]
+    if not pending:
+        print("No pending tasks to complete.")
+        return
+    print("Pending tasks:")
+    for task in pending:
+        print(f"  {task['id']}. {task['title']}")
+    try:
+        task_id = int(input("Task ID to complete: "))
+        if manager.complete_task(task_id):
+            print("Task marked as completed.")
+        else:
+            print("This task is already completed.")
+    except ValueError as error:
+        print(f"Error: {error}")
 
 
 def handle_delete(manager):
